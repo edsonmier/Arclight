@@ -2,10 +2,14 @@ package com.example.arclight_tech;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.*;
 import android.view.ViewGroup;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -21,6 +25,11 @@ public class PayoutActivity extends BottomSheetDialogFragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static boolean airpods;
+    private static boolean kingston;
+    private static boolean alexa;
+    private static boolean chrome;
+    private static boolean tapo;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -55,6 +64,69 @@ public class PayoutActivity extends BottomSheetDialogFragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
+
+    public void checkEnabled(){
+        if (MainActivity.getEnabled(MainActivity.isAirpodsEnabled)){
+            airpods = true;
+        } else{
+            airpods = false;
+        }
+        if (MainActivity.getEnabled(MainActivity.isKingstonEnabled)){
+            kingston = true;
+        } else{
+            kingston = false;
+        }
+        if (MainActivity.getEnabled(MainActivity.isAlexaEnabled)){
+            alexa = true;
+        } else{
+            alexa = false;
+        }
+        if (MainActivity.getEnabled(MainActivity.isChromeEnabled)){
+            chrome = true;
+        } else{
+            chrome = false;
+        }
+        if (MainActivity.getEnabled(MainActivity.isTapoEnabled)){
+            tapo = true;
+        } else{
+            tapo = false;
+        }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        checkEnabled();
+        makeChanges();
+    }
+
+    public void makeChanges(){
+        if (airpods){
+            getView().findViewById(R.id.item_1).setVisibility(View.VISIBLE);
+        } else {
+            getView().findViewById(R.id.item_1).setVisibility(View.GONE);
+        }
+        if (kingston){
+            getView().findViewById(R.id.item_2).setVisibility(View.VISIBLE);
+        } else{
+            getView().findViewById(R.id.item_2).setVisibility(View.GONE);
+        }
+        if (alexa){
+            getView().findViewById(R.id.item_3).setVisibility(View.VISIBLE);
+        } else{
+            getView().findViewById(R.id.item_3).setVisibility(View.GONE);
+        }
+        if (chrome){
+            getView().findViewById(R.id.item_4).setVisibility(View.VISIBLE);
+        } else{
+            getView().findViewById(R.id.item_4).setVisibility(View.GONE);
+        }
+        if (tapo){
+            getView().findViewById(R.id.item_5).setVisibility(View.VISIBLE);
+        } else{
+            getView().findViewById(R.id.item_5).setVisibility(View.GONE);
         }
     }
 
